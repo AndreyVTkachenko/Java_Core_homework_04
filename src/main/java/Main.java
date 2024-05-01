@@ -29,68 +29,88 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Account account;
 
         System.out.println("Вас приветствует банк 'Рога и копыта'! Благодарим Вас за выбор нашего банка");
         System.out.println("1. Создать счет с нулевым балансом");
         System.out.println("2. Создать счет с положительным балансом");
-        int click = scanner.nextInt();
 
-        switch (click) {
-            case 1:
-                account = new Account(0);
-                System.out.println("Счет успешно создан.");
-                System.out.println(account);
-                break;
-            case 2:
-                System.out.println("Введите начальный баланс счета:");
-                double initialBalance = scanner.nextDouble();
-                try {
-                    account = new Account(initialBalance);
-                    System.out.println("Счет успешно создан.");
-                    System.out.println(account);
-                } catch (IllegalArgumentException e) {
-                    System.out.println(e.getMessage());
-                    return;
-                }
-                break;
-            default:
-                System.out.println("Неверный выбор.");
-                return;
-        }
-
-        while (true) {
-            System.out.println("Выберите действие:");
-            System.out.println("1. Пополнить счет");
-            System.out.println("2. Списать со счета");
-            System.out.println("3. Выйти");
-
-            click = scanner.nextInt();
-            double amount;
+        try (Scanner scanner = new Scanner(System.in)) {
+            int click = Integer.parseInt(scanner.nextLine());
 
             switch (click) {
                 case 1:
-                    System.out.println("Введите сумму для пополнения:");
-                    amount = scanner.nextDouble();
-                    account.deposit(amount);
+                    account = new Account(0);
+                    System.out.println("Счет успешно создан.");
+                    System.out.println(account);
                     break;
                 case 2:
-                    System.out.println("Введите сумму для списания:");
-                    amount = scanner.nextDouble();
+                    System.out.println("Введите начальный баланс счета:");
+                    double initialBalance = Double.parseDouble(scanner.nextLine());
                     try {
-                        account.withdrawal(amount);
-                    } catch (InsufficientFundsException e) {
+                        account = new Account(initialBalance);
+                        System.out.println("Счет успешно создан.");
+                        System.out.println(account);
+                    } catch (IllegalArgumentException e) {
                         System.out.println(e.getMessage());
+                        return;
                     }
                     break;
-                case 3:
-                    System.out.println("Спасибо что выбрали наш банк!");
-                    return;
                 default:
-                    System.out.println("Неверный выбор.");
-                    break;
+                    System.out.println("Не хотите - как хотите.");
+                    return;
             }
+
+            while (true) {
+                System.out.println("Выберите действие:");
+                System.out.println("1. Пополнить счет");
+                System.out.println("2. Списать со счета");
+                System.out.println("3. Выйти");
+
+                int choice = Integer.parseInt(scanner.nextLine());
+                double amount;
+
+                switch (choice) {
+                    case 1:
+                        double depositAmount = 0;
+                        do {
+                            try {
+                                System.out.println("Введите сумму для пополнения:");
+                                depositAmount = Double.parseDouble(scanner.nextLine());
+                                break;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Некорректный ввод. Оперируйте цифрами.");
+                            }
+                        } while (true);
+                        account.deposit(depositAmount);
+                        break;
+                    case 2:
+                        double withdrawalAmount = 0;
+                        do {
+                            try {
+                                System.out.println("Введите сумму для списания:");
+                                withdrawalAmount = Double.parseDouble(scanner.nextLine());
+                                break;
+                            } catch (NumberFormatException e) {
+                                System.out.println("Некорректный ввод. Оперируйте цифрами.");
+                            }
+                        } while (true);
+                        try {
+                            account.withdrawal(withdrawalAmount);
+                        } catch (InsufficientFundsException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Спасибо что выбрали наш банк!");
+                        return;
+                    default:
+                        System.out.println("Неверный выбор.");
+                        break;
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Не хотите - как хотите.");
         }
     }
 }
