@@ -25,13 +25,72 @@ InsufficientFundsException с сообщением о недостаточных
 Достаточно выполнить только первую задачу, вторая задача является дополнительной.
  */
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Account account;
 
-        Account account1 = new Account(0, 500, 500);
-        System.out.println(account1);
-        System.out.println("----------------------------------------------");
-        account1.deposit(725);
-        account1.withdrawal(525);
+        System.out.println("Вас приветствует банк 'Рога и копыта'! Благодарим Вас за выбор нашего банка");
+        System.out.println("1. Создать счет с нулевым балансом");
+        System.out.println("2. Создать счет с положительным балансом");
+        int click = scanner.nextInt();
+
+        switch (click) {
+            case 1:
+                account = new Account(0);
+                System.out.println("Счет успешно создан.");
+                System.out.println(account);
+                break;
+            case 2:
+                System.out.println("Введите начальный баланс счета:");
+                double initialBalance = scanner.nextDouble();
+                try {
+                    account = new Account(initialBalance);
+                    System.out.println("Счет успешно создан.");
+                    System.out.println(account);
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    return;
+                }
+                break;
+            default:
+                System.out.println("Неверный выбор.");
+                return;
+        }
+
+        while (true) {
+            System.out.println("Выберите действие:");
+            System.out.println("1. Пополнить счет");
+            System.out.println("2. Списать со счета");
+            System.out.println("3. Выйти");
+
+            click = scanner.nextInt();
+            double amount;
+
+            switch (click) {
+                case 1:
+                    System.out.println("Введите сумму для пополнения:");
+                    amount = scanner.nextDouble();
+                    account.deposit(amount);
+                    break;
+                case 2:
+                    System.out.println("Введите сумму для списания:");
+                    amount = scanner.nextDouble();
+                    try {
+                        account.withdrawal(amount);
+                    } catch (InsufficientFundsException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case 3:
+                    System.out.println("Спасибо что выбрали наш банк!");
+                    return;
+                default:
+                    System.out.println("Неверный выбор.");
+                    break;
+            }
+        }
     }
 }
