@@ -32,7 +32,7 @@ public class Main {
 
         System.out.println("\n-----------------------------------------------------------");
         System.out.println("Баланс счётов после всех операций: ");
-        System.out.println("Кредитный: " + creditAccount.getAccountBalance());
-        System.out.println("Дебетовый: " + debitAccount.getAccountBalance());
+        System.out.println("Кредитный: " + String.format("%.2f", creditAccount.getAccountBalance()));
+        System.out.println("Дебетовый: " + String.format("%.2f", debitAccount.getAccountBalance()));
     }
 }
