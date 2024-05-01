@@ -3,11 +3,15 @@ package part_02;
 import exeption.InsufficientFundsException;
 
 public class CreditAccount extends Account{
-    private double creditLimit;
+    private final double creditLimit;
 
-    public CreditAccount(double initialBalance, double creditLimit) {
-        super(initialBalance);
+    public CreditAccount(String accountName, double initialBalance, double creditLimit) {
+        super(accountName, initialBalance);
         this.creditLimit = creditLimit;
+    }
+
+    public double getCreditLimit() {
+        return creditLimit;
     }
 
     @Override
@@ -16,8 +20,8 @@ public class CreditAccount extends Account{
             throw new InsufficientFundsException("Недостаточно средств и кредитного лимита на счете.");
         }
         accountBalance -= amount;
-        System.out.println("Произведено списание средств со счета на сумму: " + amount);
-        System.out.println("Текущий баланс счета: " + accountBalance + "\n");
+        System.out.println("Произведено списание средств с " + getAccountName() + " на сумму: " + amount);
+        System.out.println("Текущий баланс счета: " + accountBalance);
     }
 
     @Override

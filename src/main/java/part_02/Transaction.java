@@ -8,7 +8,11 @@ public class Transaction {
         try {
             fromAccount.withdrawal(amount);
             toAccount.deposit(amount);
-            System.out.println("Транзакция успешно завершена. Переведено " + amount + " с " + fromAccount + " на " + toAccount);
+
+            System.out.println("Транзакция успешно завершена. Переведено " + amount + " с " + fromAccount.getAccountName() + " на " + toAccount.getAccountName());
+            System.out.println("Текущий баланс после перевода:");
+            System.out.println(fromAccount);
+            System.out.println(toAccount);
         } catch (InsufficientFundsException e) {
             throw new InsufficientFundsException("Транзакция не удалась: " + e.getMessage());
         }

@@ -4,30 +4,40 @@ import exeption.InsufficientFundsException;
 
 public class Account {
     protected double accountBalance;
+    protected String accountName;
 
-    public Account(double initialBalance) {
+    public Account(String accountName, double initialBalance) {
         if (initialBalance < 0) {
             throw new IllegalArgumentException("Начальный баланс не может быть отрицательным.");
         }
         this.accountBalance = initialBalance;
+        this.accountName = accountName;
     }
 
     public double getAccountBalance() {
         return accountBalance;
     }
 
+    public String getAccountName() {
+        return accountName;
+    }
+
     void deposit(double amount) {
         accountBalance += amount;
-        System.out.println("Произведено пополнение счёта на сумму: " + amount);
-        System.out.println("Текущий баланс счёта: " + accountBalance + "\n");
+        System.out.println("Произведено пополнение счёта " + getAccountName() + " на сумму: " + amount);
+        System.out.println("Текущий баланс счёта: " + accountBalance);
     }
 
     void withdrawal(double amount) throws InsufficientFundsException {
         if (amount > accountBalance) {
-            throw new InsufficientFundsException("Недостаточно средств на счете.\n");
+            throw new InsufficientFundsException("Недостаточно средств на счете.");
         }
         accountBalance -= amount;
-        System.out.println("Произведено списание средств на сумму: " + amount);
-        System.out.println("Текущий баланс счёта: " + accountBalance + "\n");
+        System.out.println("Произведено списание средств с "+ getAccountName() + " на сумму: " + amount);
+        System.out.println("Текущий баланс счёта: " + accountBalance);
+    }
+
+    void showBalance() {
+        System.out.println("Текущий баланс счёта: " + accountBalance);
     }
 }
