@@ -25,7 +25,7 @@ public class Account {
     void deposit(double amount) {
         accountBalance += amount;
         System.out.println("Произведено пополнение счёта " + getAccountName() + " на сумму: " + amount);
-        System.out.println("Текущий баланс счёта: " + accountBalance);
+        showBalance();
     }
 
     void withdrawal(double amount) throws InsufficientFundsException {
@@ -33,8 +33,8 @@ public class Account {
             throw new InsufficientFundsException("Недостаточно средств на счете.");
         }
         accountBalance -= amount;
-        System.out.println("Произведено списание средств с "+ getAccountName() + " на сумму: " + amount);
-        System.out.println("Текущий баланс счёта: " + accountBalance);
+        System.out.println("Произведено списание средств с " + getAccountName() + " на сумму: " + amount);
+        showBalance();
     }
 
     void showBalance() {

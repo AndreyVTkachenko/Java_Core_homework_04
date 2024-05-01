@@ -20,7 +20,7 @@ public class Main {
             Transaction.transfer(creditAccount, debitAccount, 521.56);
             double withdrawalAmount = 200.17;
             debitAccount.withdrawal(withdrawalAmount);
-            Transaction.transfer(creditAccount, debitAccount, 500.12);
+            Transaction.transfer(creditAccount, debitAccount, 473.12);
             double depositAmount = 150.39;
             debitAccount.deposit(depositAmount);
             Transaction.transfer(debitAccount, creditAccount, 201.51);

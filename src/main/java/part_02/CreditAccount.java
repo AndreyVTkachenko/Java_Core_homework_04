@@ -21,7 +21,7 @@ public class CreditAccount extends Account{
         }
         accountBalance -= amount;
         System.out.println("Произведено списание средств с " + getAccountName() + " на сумму: " + amount);
-        System.out.println("Текущий баланс счета: " + accountBalance);
+        showBalance();
     }
 
     @Override
