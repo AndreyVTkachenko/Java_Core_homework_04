@@ -24,8 +24,7 @@ public class Main {
             double depositAmount = 150.39;
             debitAccount.deposit(depositAmount);
             Transaction.transfer(debitAccount, creditAccount, 201.51);
-            double withdrawalAmount2 = 1500.84;
-            debitAccount.withdrawal(withdrawalAmount2);
+            Transaction.transfer(creditAccount, debitAccount, 1597.17);
         } catch (InsufficientFundsException e) {
             System.out.println("Ошибка: " + e.getMessage());
         }
