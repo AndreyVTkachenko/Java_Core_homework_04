@@ -1,3 +1,7 @@
+package part_01;
+
+import exeption.InsufficientFundsException;
+
 public class Account {
 
     private double accountBalance;
