@@ -20,5 +20,8 @@ public class CreditAccount extends Account{
         System.out.println("Текущий баланс счета: " + accountBalance + "\n");
     }
 
-
+    @Override
+    public String toString() {
+        return "Кредитный счет: " + accountBalance;
+    }
 }
