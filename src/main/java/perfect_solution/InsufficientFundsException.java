@@ -1,4 +1,4 @@
-package perfectSolution;
+package perfect_solution;
 
 public class InsufficientFundsException extends Exception {
     private double balance;

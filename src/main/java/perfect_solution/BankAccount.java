@@ -1,4 +1,4 @@
-package perfectSolution;
+package perfect_solution;
 
 /**
  * Базовый класс "Банковский счет"

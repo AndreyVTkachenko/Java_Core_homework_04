@@ -1,4 +1,4 @@
-package perfectSolution;
+package perfect_solution;
 
 /**
  * Транзакция
